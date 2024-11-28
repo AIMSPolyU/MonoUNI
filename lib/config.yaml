@@ -2,8 +2,8 @@ random_seed: 414
 
 dataset:
   type: 'rope3d'
-  root_dir: '/your/path/to/Rope3D_data/'
-  batch_size: 8
+  root_dir: '/workspace/ImageSets/Rope3D/Rope3D_dataPolyU'
+  batch_size: 1
   class_merging: False
   use_dontcare: False
   use_3d_center: False
@@ -50,4 +50,4 @@ trainer:
 tester:
   threshold: 0.2  # confidence filter
   out_dir: 'output/rope3d_eval'
-  resume_model: '/your/path/to/checkpoint_epoch_150.pth'
+  resume_model: '/workspace/checkpoint_epoch_150.pth'
