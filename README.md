@@ -94,7 +94,14 @@ docker run --rm -it --gpus all -e CARLA_HOST=<host_ip_address> -v "C:\Users\Admi
 - [ ] KITTI dataset
 
 ## Inference (Carla Camera)
+
 - [x] Rope3D_Realtime dataset  (Fetch Camera Data from Carla)
+
+    Before starting inference, please ensure that
+    *  `pre-trained model path: tester[resume_model]` 
+    *  `dataset[root_dir]` 
+    
+    parameters are set correctly in `config.yaml`.
 
     fetch image save at '/carla_images', setting in 'lib\datasets\rope3d_realtime.py'
     inference result.txt save in 'output/rope3d/eval'
