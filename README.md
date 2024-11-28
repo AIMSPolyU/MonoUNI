@@ -9,26 +9,22 @@
 ## Introduction
 In this paper, by taking into account thediversity of pitch angles and focal lengths, we propose a unified optimization targetnamed normalized depth, which realizes the unification of 3D detection problemsfor the two sides. Furthermore, to enhance the accuracy of monocular 3D detection,3D normalized cube depth of obstacle is developed to promote the learning ofdepth information.  We posit that the richness of depth clues is a pivotal factorimpacting the detection performance on both the vehicle and infrastructure sides. Aricher set of depth clues facilitates the model to learn better spatial knowledge, andthe 3D normalized cube depth offers sufficient depth clues. Extensive experimentsdemonstrate the effectiveness of our approach.  Without introducing any extrainformation, our method, named MonoUNI, achieves state-of-the-art performanceon five widely used monocular 3D detection benchmarks, including Rope3D and DAIR-V2X-I for the infrastructure side, KITTI and Waymo for the vehicle side,and nuScenes for the cross-dataset evaluation.
 
-## News
-- [x] ***[20231016]*** create repo
-- [x] ***[20240314]*** create reporelease Rope3D dataset which is merged into 4 categries and do ROI filter for eval
-- [x] ***[20240315]*** release 3D Cube Depth data proposed by MonoUNI (contained in Rope3D dataset together)
-- [x] ***[20240326]*** release init train/val code
-- [x] ***[20240326]*** release MonoUNI checkpoint on Rope3D
-- [x] ***[20240326]*** support Rope3D dataset
-- [ ] support DAIR-V2X-I dataset
-- [ ] support KITTI dataset
 
-## Installation
+# PolyU AIMS New Guidelines [Nov 28 2024]
+1) Add Conda env File.
+2) Add Docker File.
+3) Integrate Carla camera and make Inference in Real Time
+
+## Installation [Conda]
 a. Clone this repository.
 ~~~
-git clone https://github.com/Traffic-X/MonoUNI
+git clone https://github.com/AIMSPolyU/MonoUNI.git
 ~~~
 
 b. Install the dependent libraries as follows:
-* Create a new env with conda
+* Install the dependent python libraries from file:
 ~~~
-conda create -n rope3d python=3.8
+conda env -n rope3d create -f environment.yml
 ~~~
 
 * Activate the env
@@ -36,10 +32,25 @@ conda create -n rope3d python=3.8
 conda activate rope3d
 ~~~
 
-* Install the dependent python libraries:
+## Installation Docker
+a. Clone this repository.
 ~~~
-pip install torch==1.5.0 torchvision==0.6.0 numpy==1.23.5 numba==0.58.1 scikit-image==0.21.0 opencv-python==3.4.10.37 tqdm==4.65.0 matplotlib==3.7.1 protobuf==4.22.1 pyyaml==6.0
+git clone https://github.com/AIMSPolyU/MonoUNI.git
 ~~~
+
+b. Build Image and run container as follows:
+* Create a new image
+~~~
+cd MonoUNI
+build -t rope3d .
+~~~
+
+
+* Create Container from Image:
+~~~
+docker run --rm -it --gpus all -e CARLA_HOST=<host_ip_address> -v "C:\Users\Administrator\Desktop\MonoUNI":/workspac rope3d bash
+~~~
+
 
 ## Dataset
 - [x] Download the official Rope3D dataset from [**Here**](https://pan.baidu.com/s/1Tt014qMNcDxAMCkEWH_EZQ?pwd=d1yd).  
@@ -81,6 +92,15 @@ pip install torch==1.5.0 torchvision==0.6.0 numpy==1.23.5 numba==0.58.1 scikit-i
     ~~~
 - [ ] DAIR-V2X-I dataset
 - [ ] KITTI dataset
+
+## Inference (Carla Camera)
+- [x] Rope3D_Realtime dataset  (Fetch Camera Data from Carla)
+
+    fetch image save at '/carla_images', setting in 'lib\datasets\rope3d_realtime.py'
+    inference result.txt save in 'output/rope3d/eval'
+    ~~~
+    bash livecam.sh
+    ~~~
 
 ## Weight
 Download the checkpoint (Rope3D) from [**here**](https://pan.baidu.com/s/13H8CJzwuDISGR4q6MRg3sg?pwd=g86j)
